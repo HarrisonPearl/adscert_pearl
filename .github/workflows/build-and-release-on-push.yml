@@ -50,9 +50,9 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v2
     - name: create image from repository
-      run: docker build -t ghcr.io/${{ github.actor }}/ads-cert-app .
+      run: docker build -t ghcr.io/${{ secrets.GHCR_USERNAME }}/ads-cert-app .
     - name: push image to GitHub Container Registry
-      run: docker push ghcr.io/${{ github.actor }}/ads-cert-app:latest
+      run: docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/ads-cert-app:latest
 
   Release:
     name: Create Release
