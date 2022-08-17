@@ -1,4 +1,4 @@
-name: Build Test and Release Binary on Push
+name: Build and Release on Push
 
 # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
 on:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  build_and_test:
+  Build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -32,10 +32,18 @@ jobs:
         go vet ./...
         golint ./...
 
-    - name: Run Tests
+    - name: Test
       run: go test -v ./...
 
-  release:
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v5
+      with:
+        image: adscert
+        registry: ghcr.io
+        username: ${{ secrets.GHCR_USERNAME }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+  Release:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
