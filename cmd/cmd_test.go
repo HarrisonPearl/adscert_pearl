@@ -102,6 +102,7 @@ func TestSignSendAndVerify(t *testing.T) {
 	for signatureResponse.GetSignatureOperationStatus() != api.SignatureOperationStatus_SIGNATURE_OPERATION_STATUS_OK && retries > 0 {
 		time.Sleep(5 * time.Second)
 		signatureResponse = signRequest(testsignParams)
+		retries -= 1
 	}
 	if retries == 0 {
 		t.Fail()
