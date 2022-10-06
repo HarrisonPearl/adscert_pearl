@@ -9,7 +9,7 @@ import (
 	"github.com/IABTechLab/adscert/pkg/adscert/api"
 )
 
-func BenchmarkSigningRequest(b *testing.B) {
+func BenchmarkTestSigningRequest(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		testsignParams := &testsignParameters{}
 		testsignParams.url = "https://adscerttestverifier.dev"
@@ -20,7 +20,7 @@ func BenchmarkSigningRequest(b *testing.B) {
 	}
 }
 
-func BenchmarkVerifyingRequest(b *testing.B) {
+func BenchmarkTestVerifyingRequest(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		testverifyParams := &testverifyParameters{}
 		testverifyParams.destinationURL = "https://adscerttestverifier.dev"
@@ -32,7 +32,7 @@ func BenchmarkVerifyingRequest(b *testing.B) {
 	}
 }
 
-func BenchmarkWebReceiver(b *testing.B) {
+func BenchmarkTestWebReceiver(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		req, err := http.NewRequest("GET", "http://adscerttestverifier.dev:5000", nil)
 		if err != nil {
@@ -46,7 +46,7 @@ func BenchmarkWebReceiver(b *testing.B) {
 	}
 }
 
-func BenchmarkSignSendAndVerify(b *testing.B) {
+func BenchmarkTestSignSendAndVerify(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		testURL := "http://adscerttestverifier.dev:5000"
 
